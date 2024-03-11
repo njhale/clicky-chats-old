@@ -43,5 +43,9 @@ generate:
 	oapi-codegen -package openai -generate types,skip-prune -o pkg/generated/openai/types.go https://raw.githubusercontent.com/openai/openai-openapi/6b64280c3db0082cbafa34495b9f3a3a58eb960d/openapi.yaml
 	oapi-codegen -package openai -generate std-http-server,spec -o pkg/generated/openai/server.go https://raw.githubusercontent.com/openai/openai-openapi/6b64280c3db0082cbafa34495b9f3a3a58eb960d/openapi.yaml
 
+update-openapi:
+	# Get the latest OpenAI OpenAPI spec
+	curl -o openapi/openapi.yaml  https://raw.githubusercontent.com/openai/openai-openapi/6b64280c3db0082cbafa34495b9f3a3a58eb960d/openapi.yaml
+
 run-dev:
 	go run -tags "${GO_TAGS}" -ldflags "-s -w" ./main.go server --with-agents=true
